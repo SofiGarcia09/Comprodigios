@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Medtodo de pago</title>
+    </head>
+    <body>
+        <h1>Elija una opción de envío</h1>
+        <form action="metodoPago.php" method="post">
+            <div align="center">
+                    <input type="radio" name="tipo_envio" value="Envio_a_tu_direccion">
+                    <img src="http://localhost/imagenes/Enviodireccion.jpg" alt="envioCasa" width="100" height="100" style="border-radius: 0; border: 2px solid blue;">
+                    
+                    <input type="radio" name="tipo_envio" value="Rcoger_en_tienda">
+                    <img src="http://localhost/imagenes/recoger.jpg" alt="recoger_en_tienda" width="100" height="100" style="border-radius: 0; border: 2px solid blue;">
+                
+                    <input type="radio" name="tipo_envio" value="Entrega_hoy">
+                    <img src="http://localhost/imagenes/envioRapido.jpg" alt="envRapido" width="100" height="100" style="border-radius: 0; border: 2px solid blue;"><br><br><br>
+                    
+                    <table style="border-collapse: collapse; border: 2px solid blue; border-radius: 5px;">
+                        <tr>
+                            <td style="padding: 16px; font-size: 21px; background-color:  #99a7e88f;">
+                                Seleccione una sucursal
+                            </td>
+                            <td style="padding: 15px; background-color:  #99a7e88f;">
+                                <select name="sucursal" style="border: 1px solid blue; border-radius: 5px; font-size: 18px; background-color: #99a7e88f;">
+                                    <option value="Bogota">Bogotá</option>S
+                                    <option value="Manizales">Manizales</option> 
+                                    <option value="Pereira">Pereira</option>
+                                    <option value="Medellin">Medellín</option>
+                                    <option value="Armenia">Armenia </option>
+
+                                </select>
+                            </td>
+                        </tr>
+                    </table><br><br>
+                    <table style="border-collapse: collapse; border: 2px solid blue; border-radius: 5px;">
+                        <tr>
+                            <td style="padding: 12px; font-size: 18px; background-color:  #99a7e88f;">
+                                Seleccione método de pago
+                            </td>
+                            <td style="padding: 10px; background-color:  #99a7e88f;">
+                                <select name="metodoPago" style="border: 1px solid blue; border-radius: 5px; font-size: 14px; background-color: #99a7e88f;">
+                                    <option value="Tarjeta credito">Tarjeta crédito </option>
+                                    <option value="Tarjeta debito">Tarjeta débito</option> 
+                                    <option value="PayPal">PayPal</option>
+                                    <option value="Pago en efectivo">Pago en efectivo</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table><br><br><br>
+                    <input type="submit" value="Guardar" style="padding: 7px; font-size: 20px;">
+            </div>
+        </form>      
+    </body>
+</html>
