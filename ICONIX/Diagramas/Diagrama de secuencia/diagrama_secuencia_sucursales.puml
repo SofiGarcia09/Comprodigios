@@ -1,0 +1,29 @@
+@startuml
+actor "Cliente" as actorCliente
+boundary "<<Pantalla>>\nOpcionEnvio" as boundryPantallaOpcionEnvio
+
+actorComprador -> boundryPantallaOpcionEnvio
+activate boundryPantallaOpcionEnvio
+   boundryPantallaOpcionEnvio -> boundryPantallaOpcionEnvio: getSucursales()
+    activate boundryPantallaOpcionEnvio
+        control "SucursalesController" as sucursalesController
+            control "SucursalesModel" as sucursalesModel
+           boundryPantallaOpcionEnvio -> sucursalesController: GET api/v1/sucursales: Sucursales[]
+            activate sucursalesController
+                sucursalesController -> sucursalesModel: getAllSucursales()
+                activate sucursalesController
+                    database "bd_comprodigios" as dbComprodigios
+                    entity sucursales
+                    activate sucursalesModel
+                        activate sucursalesModel
+                            sucursalesModel -> dbComprodigios: SQL query
+                            dbComprodigios -> sucursales
+                            dbComprodigios -> sucursalesModel: {id, departamento, ciudad}
+                        deactivate
+
+                    deactivate
+                deactivate
+        deactivate
+    deactivate
+deactivate
+@enduml

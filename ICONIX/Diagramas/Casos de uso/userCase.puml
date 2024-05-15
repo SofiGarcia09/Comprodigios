@@ -1,0 +1,17 @@
+@startuml
+
+actor Cliente as cliente
+
+usecase "Seleccionar un equipo" as seleccionarEquipo
+cliente-right-> seleccionarEquipo
+
+usecase "Seleccionar opcion envío" as sleccionarEnvio
+cliente -left-> sleccionarEnvio
+
+usecase "Registrarse" as registrarse
+cliente-down-> registrarse
+
+usecase "Iniciar sesión" as iniciarSesion
+cliente -up-> iniciarSesion
+
+@enduml

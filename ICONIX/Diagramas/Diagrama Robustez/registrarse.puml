@@ -1,0 +1,40 @@
+@startuml
+
+actor Cliente as cliente
+boundary " FE Pantalla 'Registrarse '" as feRegistrarse
+cliente -> feRegistrarse
+
+control "Ingresar nombre completo" as ingresarNombreCompleto
+feRegistrarse -up-> ingresarNombreCompleto
+control "Ingrese su número de teléfono" as ingreseTelefono
+feRegistrarse -up-> ingreseTelefono
+control "Ingrese su e-mail" as ingresarEmail
+feRegistrarse -up-> ingresarEmail
+control "Ingrese una contraseña" as ingresarContraseña
+feRegistrarse -up-> ingresarContraseña
+
+control "Validar datos" as validarDatos
+ingresarNombreCompleto -up-> validarDatos
+ingreseTelefono -up-> validarDatos
+ingresarEmail -up-> validarDatos
+ingresarContraseña -up-> validarDatos
+
+boundary "Mostrar error" as error 
+validarDatos -left-> error: Los datos no son validos
+
+boundary "Mostrar error" as mostrarError
+validarDatos -> mostrarError: La cuenta ya existe 
+
+control "Darle clic en botón crear cuenta" as crearCuenta
+feRegistrarse -> crearCuenta
+
+control "Guardar datos registrarse" as datosRegistrarse
+crearCuenta -> datosRegistrarse
+entity registrarse as registro
+datosRegistrarse -> registro
+usecase "Iniciar sesión" as iniciarSesion
+datosRegistrarse -down-> iniciarSesion
+
+feRegistrarse-down->iniciarSesion: ¿Ya tiene una cuenta?
+
+@enduml

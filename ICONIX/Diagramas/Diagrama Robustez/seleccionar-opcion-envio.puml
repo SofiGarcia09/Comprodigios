@@ -1,0 +1,52 @@
+@startuml
+
+actor Cliente as cliente
+boundary "FE Pantalla 'Seleccionar opción envío'" as fePantallaOpcionEnvio
+cliente -> fePantallaOpcionEnvio
+
+boundary "Elija una opción" as feElegirOpcion
+control "Enviar a tu dirección" as envioDireccion
+control "Recoger en tienda" as recogerEnTienda
+control "Entregar hoy" as entregHoy
+
+fePantallaOpcionEnvio -> feElegirOpcion
+feElegirOpcion -up-> envioDireccion
+feElegirOpcion -up-> recogerEnTienda
+feElegirOpcion -up-> entregHoy
+
+control "Validar selección de envio" as validarEnvio
+envioDireccion -up-> validarEnvio
+recogerEnTienda -up-> validarEnvio
+entregHoy -up-> validarEnvio
+
+boundary "Mostrar error" as error 
+validarEnvio -> error: No seleccionó ninguna opción
+
+control "BE Obtener sucursales" as obtenerSucursales
+fePantallaOpcionEnvio -down-> obtenerSucursales
+entity ciudades as entityCiudades
+entity pueblos as entityPueblos
+obtenerSucursales -left-> entityCiudades
+obtenerSucursales -left-> entityPueblos
+boundary "FE Sucursal" as sucursal 
+obtenerSucursales -> sucursal
+
+control "Obtener métodos de pago" as metodoPago
+fePantallaOpcionEnvio -up-> metodoPago
+entity metodosDePago as entityMetodosPago
+metodoPago -left-> entityMetodosPago
+boundary "FE Método de pago" as feMetodoPado
+metodoPago -right-> feMetodoPado
+
+control "Darle clic al botón siguiente" as botonSiguiente
+fePantallaOpcionEnvio -> botonSiguiente
+control "Guardar opción envío" as guardarOpcionEnvio
+botonSiguiente -> guardarOpcionEnvio
+entity seleccionar_opcion_envio as seleccionOpcion
+guardarOpcionEnvio -> seleccionOpcion
+
+usecase "Registrarse" as registrarse
+guardarOpcionEnvio -down-> registrarse
+
+
+@enduml

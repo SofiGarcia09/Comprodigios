@@ -1,0 +1,53 @@
+@startuml
+
+class compra{
+    int cantidadArticulos
+    int precioArticulos
+}
+class cliente{
+    string nombre
+    float edad
+    string Email
+    string tipoDocumento
+    string documento
+}
+class celular{
+    string marca
+    string color
+    string RAM
+    string porcesador 
+}
+class computador{
+    string marca
+    string RAM
+    string porcesador
+    string color
+}
+class televisor{
+    string marca
+    string resolucion 
+    float pulgadas
+}
+class consolas{
+    string marca 
+    string color
+    string RAM 
+}
+class metodoDePago{
+    string tarjetaDebito
+    string tarjetaCredito
+}
+class direccion{
+    string ciudad
+    string barrio 
+}
+
+cliente -up-o direccion
+cliente -left-o metodoDePago
+cliente *- compra
+compra o-up-celular
+compra o- computador
+compra o-down- televisor
+compra o-down- consolas
+
+@enduml

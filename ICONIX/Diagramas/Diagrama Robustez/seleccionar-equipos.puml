@@ -1,0 +1,50 @@
+@startuml
+
+actor Cliente as cliente
+boundary "FE Pantalla 'Seleccionar un Equipo'" as fePantallaEquipos
+cliente -> fePantallaEquipos
+control "BE obtener ciudades" as seleccionDatosCiudades
+fePantallaEquipos -down-> seleccionDatosCiudades
+entity ciudades as entityCiudades
+seleccionDatosCiudades -left-> entityCiudades
+boundary "FE su ciudad " as suCiudadOrigen
+seleccionDatosCiudades -> suCiudadOrigen
+
+boundary "Equipos" as feSeleccionarEquipos
+fePantallaEquipos -up-> feSeleccionarEquipos
+control "Seleccionar celular" as celulares
+control "Seleccionar computador" as computadores
+control "Seleccionar Televisor" as televisores
+control "Seleccioanr Consola" as consolas
+feSeleccionarEquipos -up-> celulares
+feSeleccionarEquipos-up-> computadores
+feSeleccionarEquipos -up-> televisores
+feSeleccionarEquipos -up-> consolas
+
+control "Validar selección de equipos" as validarSeleccionEquipos
+celulares -up-> validarSeleccionEquipos
+computadores -up-> validarSeleccionEquipos
+televisores -up-> validarSeleccionEquipos
+consolas -up-> validarSeleccionEquipos
+
+boundary "Mostrar error" as error 
+validarSeleccionEquipos -> error: No seleccionó ningún equipo
+
+control "Darle clic al botón siguiente" as botonSiguiente
+control "Guardar Equipos" as guardarDatosDeEquipos
+
+fePantallaEquipos -right-> botonSiguiente
+botonSiguiente -> guardarDatosDeEquipos
+
+
+boundary "Cambiar cantidad equipos" as feCantidadEquipos
+fePantallaEquipos -right-> feCantidadEquipos
+
+usecase "Seleccionar opción envío" as sleccionarEnvio
+guardarDatosDeEquipos -down-> sleccionarEnvio
+
+entity seleccionar_un_equipo as entityEquipos
+guardarDatosDeEquipos -> entityEquipos
+
+
+@enduml
