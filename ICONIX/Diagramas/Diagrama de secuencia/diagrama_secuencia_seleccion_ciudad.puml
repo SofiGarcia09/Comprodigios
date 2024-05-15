@@ -8,9 +8,9 @@ activate boundryPantallaEquipos
     activate boundryPantallaEquipos
         control "CiudadesController" as ciudadesController
             control "CiudadesModel" as ciudadesModel
-           boundryPantallaEquipos -> ciudadesController: GET api/v1/ciudad: Ciudad[]
+           boundryPantallaEquipos -> ciudadesController: GET api/v1/ciudades: Ciudades[]
             activate ciudadesController
-                ciudadesController -> ciudadesModel: getAllCiudad()
+                ciudadesController -> ciudadesModel: getAllCiudades()
                 activate ciudadesController
                     database "bd_comprodigios" as dbComprodigios
                     entity ciudades
