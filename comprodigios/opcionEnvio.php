@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Método de pago</title>
+        <title>Opcion de envío</title>
         <?php 
         $opcion_envio = $_POST["tipo_envio"];
         $sucursal = $_POST["sucursal"];
