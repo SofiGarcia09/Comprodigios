@@ -1,6 +1,5 @@
 import express from 'express';
-import CiudadesModel from '../ciudades-model.mjs';
-
+import CiudadesModelPrisma from '../ciudades-model.prisma.mjs';
 const { Router } = express;
 
 export default class CiudadesController{
@@ -9,6 +8,7 @@ export default class CiudadesController{
     #ciudadesModel = null;
 
     constructor(){
+      this.#ciudadesModel = new CiudadesModelPrisma();
         this.registerRoutes();
     }
 
@@ -18,20 +18,30 @@ export default class CiudadesController{
     registerRoutes(){
         const routerV1 = Router();
         routerV1.get(`/ciudades`,async(req,res) => await this.getAllCiudades(req,res));
+        routerV1.post(`/ciudades`,async(req,res) => await this.createCiudad(req,res));
+
 
         this.#router.use('/v1', routerV1);
     }
 
     async getAllCiudades(req, res) {
         try {
-          this.#ciudadesModel = new CiudadesModel();
-          this.#ciudadesModel.connect();
           const ciudades = await this.#ciudadesModel.getAllCiudades();
           res.json(ciudades);
         } catch (error) {
           console.error(`error: ${error}`);
-        } finally {
-          this.#ciudadesModel.closeConnection();
-        }
+        } 
     }
+
+    async createCiudad(req, res) {
+      try {
+        const ciudad = req.body;
+        console.info({ciudad});
+        this.#ciudadesModel.addCiudad(ciudad)
+        res.send('ciudad creada');
+      } catch (error) {
+        console.error(`error: ${error}`);
+      } 
+    }
+    
 }

@@ -1,0 +1,22 @@
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")  
+}
+
+generator client{
+    provider = "prisma-client-js"
+}
+
+model sucursales {
+    id           Int      @id @default(autoincrement())
+    departamento String   
+    nombre       String
+}
+
+model ciudades {
+    id            Int      @id @default(autoincrement())
+    pais          String   
+    ciudad        String
+    codigoPostal  Int 
+}
+
