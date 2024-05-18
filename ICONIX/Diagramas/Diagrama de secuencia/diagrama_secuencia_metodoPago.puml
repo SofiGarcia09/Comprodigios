@@ -1,0 +1,28 @@
+@startuml
+actor "Cliente" as actorCliente
+boundary "<<Pantalla>>\nOpcionEnvio" as boundryPantallaOpcionEnvio
+
+actorCliente -> boundryPantallaOpcionEnvio
+activate boundryPantallaOpcionEnvio
+   boundryPantallaOpcionEnvio -> boundryPantallaOpcionEnvio: getMetodoPago()
+    activate boundryPantallaOpcionEnvio
+        control "MetodoPagoController" as metodoPagoController
+            control "metodoPagoModel" as metodoPagoModel
+           boundryPantallaOpcionEnvio -> metodoPagoController: GET api/v1/metodoPago: MetodoPago[]
+            activate metodoPagoController
+                metodoPagoController -> metodoPagoModel: getAllMetodoPago()
+                activate metodoPagoController
+                    database "bd_comprodigios" as dbComprodigios
+                    entity metodopago
+                    activate metodoPagoModel
+                        activate metodoPagoModel
+                            metodoPagoModel -> dbComprodigios: SQL query
+                            dbComprodigios -> metodopago
+                            dbComprodigios -> metodoPagoModel: {id, nombre}
+                        deactivate
+                    deactivate
+                deactivate
+        deactivate
+    deactivate
+deactivate
+@enduml

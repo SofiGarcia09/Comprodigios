@@ -1,0 +1,28 @@
+@startuml
+actor "Cliente" as actorCliente
+boundary "<<Pantalla>>\nEquipos" as boundryPantallaEquipos
+
+actorCliente -> boundryPantallaEquipos
+activate boundryPantallaEquipos
+   boundryPantallaEquipos -> boundryPantallaEquipos: getCelulares()
+    activate boundryPantallaEquipos
+        control " CelularesController" as celularesController
+            control "CelularesModel" as celularesModel
+           boundryPantallaEquipos -> celularesController: GET api/v1/celulares: Celulares[]
+            activate celularesController
+                celularesController -> celularesModel: getAllCelulares()
+                activate celularesController
+                    database "bd_comprodigios" as dbComprodigios
+                    entity celulares
+                    activate celularesModel
+                        activate celularesModel
+                            celularesModel -> dbComprodigios: SQL query
+                            dbComprodigios -> celulares
+                            dbComprodigios -> celularesModel: {id, marca, modelo, color, precio, sistemaOperativo, pantalla, RAM, almacenamiento}
+                        deactivate
+
+                    deactivate
+                deactivate
+        deactivate
+    deactivate
+deactivate

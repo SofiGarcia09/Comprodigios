@@ -2,7 +2,7 @@
 actor "Cliente" as actorCliente
 boundary "<<Pantalla>>\nOpcionEnvio" as boundryPantallaOpcionEnvio
 
-actorComprador -> boundryPantallaOpcionEnvio
+actorCliente -> boundryPantallaOpcionEnvio
 activate boundryPantallaOpcionEnvio
    boundryPantallaOpcionEnvio -> boundryPantallaOpcionEnvio: getSucursales()
     activate boundryPantallaOpcionEnvio
