@@ -4,6 +4,8 @@ import CiudadesController from './features/ciudades/api/v1/ciudades-controller.m
 import MetodoPagoController from './features/metodoPago/api/v1/metodoPago-controller.mjs';
 import CelularesController from './features/celulares/api/v1/celulares-controller.mjs';
 import ComputadoresController from './features/computadores/api/v1/computadores-controller.mjs';
+import TelevisoresController from './features/televisores/api/v1/televisores-controller.mjs';
+import ConsolasController from './features/consolas/api/v1/consolas.controller.mjs';
 const app = express();
 app.use(json());
 
@@ -21,6 +23,12 @@ app.use('/api/', celularesApiController.getRouter());
 
 const computadoresApiController = new ComputadoresController();
 app.use('/api/', computadoresApiController.getRouter());
+
+const televisoresApiController = new TelevisoresController();
+app.use('/api/', televisoresApiController.getRouter());
+
+const consolasApiController = new ConsolasController();
+app.use('/api/', consolasApiController.getRouter());
 
 
 const PORT = process.env.PORT || 3000;
