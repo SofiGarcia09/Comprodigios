@@ -1,5 +1,5 @@
 import express from 'express';
-import CelularesModelPrisma from '../celulares-model.prisma.mjs';
+import CelularesModelPrisma from '../../celulares-model.prisma.mjs';
 const { Router } = express;
 
 export default class CelularesController{
